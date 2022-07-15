@@ -18,7 +18,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         (4, _('Pre-registered')),
         (8, _('Locked'))
     )
-    full_name = models.CharField(_('Full Name'),max_length=255)
+    full_name = models.CharField(_('Full Name'), max_length=255)
     nick_name = models.CharField(_('Nickname'), max_length=255, null=True, blank=True, default=None)
     email = models.EmailField(_('Email Address'), blank=False, unique=True)
     birth_country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='birth_country')
