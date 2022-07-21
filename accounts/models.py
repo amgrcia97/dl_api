@@ -33,6 +33,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table = 'users'
 
 
+class UserImage(models.Model):
+    '''User Image'''
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='user_image')
+    image = models.CharField(_('Imagem'), max_length=1024, null=False, blank=False)
+
+    class Meta:
+        verbose_name = _('User Image')
+        verbose_name_plural = _('Users Images')
+        db_table = 'users_images'
+
+
 class Gender(models.Model):
     '''Gender'''
     title = models.CharField(_('Gender'), max_length=255, blank=False, null=False)
@@ -136,6 +147,18 @@ class UserType(models.Model):
         db_table = 'user_types'
 
 
+class Profile(models.Model):
+    '''Profile'''
+    title = models.CharField(_('Profile'), max_length=255, blank=False, null=False)
+    slug = models.SlugField(_('slug'), unique=True, blank=False, null=False)
+    status = models.IntegerField(_('Status'), choices=DEFAULT_STATUS, default=1)
+
+    class Meta:
+        verbose_name = _('Profile')
+        verbose_name_plural = _('Profiles')
+        db_table = 'profiles'
+
+
 class UserData(models.Model):
     '''User Data'''
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='user_data')
@@ -147,6 +170,7 @@ class UserData(models.Model):
     phone = models.ForeignKey(Phone, on_delete=models.CASCADE, related_name='user_phone', null=True)
     profession = models.ForeignKey(Profession, on_delete=models.CASCADE, related_name='user_profession', null=True)
     user_type = models.ForeignKey(UserType, on_delete=models.CASCADE, related_name='user_type', null=True, default=None)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile', null=True, default=None)
 
     class Meta:
         verbose_name = _('User Data')
