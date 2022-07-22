@@ -54,6 +54,7 @@ class UserImage(models.Model):
 class AgeGroup(models.Model):
     '''AgeGroup'''
     title = models.CharField(_('Title'), max_length=120, null=False, blank=False)
+    description = models.CharField(_('Description'), max_length=120, null=False, blank=False)
     slug = models.SlugField(_('Slug'), blank=False, null=False, unique=True)
     status = models.IntegerField(_('Status'), choices=DEFAULT_STATUS, default=1)
 

@@ -12,3 +12,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             'slug',
             'status',
             ]
+
+    @staticmethod
+    def load_queryset():
+        queryset = Profile.objects.all()
+        return queryset.distinct().order_by('id')
