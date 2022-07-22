@@ -33,6 +33,7 @@ class UserImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserImage
         fields = [
+            'id',
             'user',
             'image',
         ]
@@ -43,6 +44,7 @@ class AgeGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgeGroup
         fields = [
+            'id',
             'title',
             'slug',
             'status'
@@ -66,6 +68,7 @@ class UserTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserType
         fields = [
+            'id',
             'title',
             'slug',
             'status'

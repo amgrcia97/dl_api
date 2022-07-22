@@ -25,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     nick_name = models.CharField(_('Nickname'), max_length=255, null=True, blank=True, default=None)
     date_joined = models.DateTimeField(_('Date Joined'), auto_now_add=False)
     date_updated = models.DateTimeField(_('Date Changed'), auto_now=False)
-    status = models.IntegerField(_('Status'), choices=DEFAULT_STATUS, default=2)
+    status = models.IntegerField(_('Status'), choices=DEFAULT_STATUS, default=1)
     is_staff = models.BooleanField(_('is_staff'), default=False)
     is_superuser = models.BooleanField(_('is_superuser'), default=False)
 
