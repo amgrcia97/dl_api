@@ -13,4 +13,4 @@ def create_default_profiles():
         ]
 
     for profile in default_profiles:
-        Profile.objects.get_or_create(id=profile['id'], title=profile['title'], slug=profile['slug'], status=profile['status'])
+        Profile.objects.create(id=profile['id'], title=profile['title'], slug=profile['slug'], status=profile['status'])

@@ -11,6 +11,7 @@ from accounts.models import (
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'username',
         'email',
         'nick_name',
@@ -25,6 +26,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(AgeGroup)
 class AgeGroupAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'title',
         'slug',
         'status'
@@ -33,12 +35,16 @@ class AgeGroupAdmin(admin.ModelAdmin):
 
 @admin.register(Phone)
 class PhoneAdmin(admin.ModelAdmin):
-    list_display = ('phone', )
+    list_display = (
+        'id',
+        'phone',
+        )
 
 
 @admin.register(UserType)
 class UserTypeAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'title',
         'slug',
         'status'

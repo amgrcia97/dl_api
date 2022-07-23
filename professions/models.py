@@ -10,7 +10,7 @@ class Profession(models.Model):
         (3, _('Deleted')),
     )
     title = models.CharField(_('Profession'), max_length=255, blank=False, null=False)
-    slug = models.SlugField(_('slug'), unique=True, blank=False, null=False)
+    # slug = models.SlugField(_('slug'), unique=True, blank=False, null=False)
     status = models.IntegerField(_('Status'), choices=PROFESSION_STATUS, default=1)
 
     class Meta:

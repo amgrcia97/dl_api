@@ -1,3 +1,12 @@
-# from django.contrib import admin
+from django.contrib import admin
+from professions.models import Profession
 
-# Register your models here.
+
+@admin.register(Profession)
+class ProfessionAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'title',
+        # 'slug',
+        'status'
+        )

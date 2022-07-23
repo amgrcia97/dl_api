@@ -5,8 +5,14 @@ from countries.models import Country
 
 class State(models.Model):
     '''State'''
+    STATE_STATUS = (
+        (1, _('Active')),
+        (2, _('Inactive')),
+        (3, _('Deleted')),
+    )
     name = models.CharField(_('State'), max_length=256, null=False, blank=False)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='country_states')
+    status = models.IntegerField(choices=STATE_STATUS, default=1)
 
     class Meta:
         verbose_name = _('State')
@@ -16,8 +22,14 @@ class State(models.Model):
 
 class City(models.Model):
     '''City'''
+    CITY_STATUS = (
+        (1, _('Active')),
+        (2, _('Inactive')),
+        (3, _('Deleted')),
+    )
     name = models.CharField(_('City'), max_length=256, null=False, blank=False)
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='state_cities')
+    status = models.IntegerField(choices=CITY_STATUS, default=1)
 
     class Meta:
         verbose_name = _('City')

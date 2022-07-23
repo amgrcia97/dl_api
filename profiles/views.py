@@ -37,8 +37,9 @@ class ProfileAdminViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         profile = get_object_or_404(Profile.objects.filter(pk=pk))
-        profile.status = 3
-        profile.save()
+        if profile.slug in ['admin_master', 'admin', 'staff', 'teacher', 'student', 'teacher_and_student']:
+            profile.status = 3
+            profile.save()
         return Response({'detail': 'deleted'}, status=status.HTTP_202_ACCEPTED)
 
     @action(detail=False, methods=['GET'], url_name='read-user-data')

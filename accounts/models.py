@@ -4,9 +4,9 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from accounts.managers import UserManager
 from addresses.models import Address
-from countries.models import Country, CountryLanguage
+from countries.models import Country
 from genders.models import Gender
-from languages.models import Language
+from languages.models import Language, CountryLanguage
 from professions.models import Profession
 from profiles.models import Profile
 
