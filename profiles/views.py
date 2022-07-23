@@ -5,14 +5,22 @@ from rest_framework.response import Response
 from profiles.models import Profile
 from profiles.serializers import ProfileSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from django_filters import rest_framework as filters
+from rest_framework import filters as rest_framework_filters
 
 
 class ProfileAdminViewSet(viewsets.ModelViewSet):
     '''API for "Discere Linguis" Profiles'''
-    queryset = Profile.objects.all().order_by('id')
     serializer_class = ProfileSerializer
     permission_classes = (IsAdminUser, IsAuthenticated)
-    filterset_fields = ('id', 'title',)
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        rest_framework_filters.SearchFilter,
+        rest_framework_filters.OrderingFilter,
+    )
+    filterset_fields = ('id', 'title')
+    search_fields = filterset_fields
+    ordering_fields = search_fields
 
     def get_queryset(self):
         return self.get_serializer().load_queryset()
@@ -40,9 +48,11 @@ class ProfileAdminViewSet(viewsets.ModelViewSet):
         if profile.slug in ['admin_master', 'admin', 'staff', 'teacher', 'student', 'teacher_and_student']:
             profile.status = 3
             profile.save()
-        return Response({'detail': 'deleted'}, status=status.HTTP_202_ACCEPTED)
+        else:
+            profile.save()
+        return Response({'deleted': profile.slug}, status=status.HTTP_202_ACCEPTED)
 
-    @action(detail=False, methods=['GET'], url_name='read-user-data')
+    @action(detail=False, methods=['GET'], name='Default profile registration', url_name='set-default-profiles')
     def set_default_profiles(self, request):
         from profiles.signals import create_default_profiles
         try:

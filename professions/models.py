@@ -9,7 +9,7 @@ class Profession(models.Model):
         (2, _('Inactive')),
         (3, _('Deleted')),
     )
-    title = models.CharField(_('Profession'), max_length=255, blank=False, null=False)
+    title = models.CharField(_('Profession'), max_length=255, blank=False, null=False, unique=True)
     # slug = models.SlugField(_('slug'), unique=True, blank=False, null=False)
     status = models.IntegerField(_('Status'), choices=PROFESSION_STATUS, default=1)
 

@@ -2,7 +2,7 @@ from profiles.models import Profile
 
 
 def create_default_profiles():
-    '''Generate system default users'''
+    '''Generate system default profiles'''
     default_profiles = [
         {"id": 1, "title": "Admin Master", "slug": "admin_master", "status": 1},
         {"id": 2, "title": "Admin", "slug": "admin", "status": 1},
