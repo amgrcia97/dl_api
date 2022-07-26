@@ -22,6 +22,7 @@ urlpatterns = [
     url('^api-auth/', include('rest_framework.urls')),
 
     url('^accounts/', include('accounts.urls')),
+    url('^genders/', include('genders.urls')),
     url('^languages/', include('languages.urls')),
     url('^professions/', include('professions.urls')),
     url('^profiles/', include('profiles.urls')),

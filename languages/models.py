@@ -20,6 +20,9 @@ class Language(models.Model):
         verbose_name_plural = _('Languages')
         db_table = 'languages'
 
+    def __str__(self):
+        return self.title
+
 
 class CountryLanguage(models.Model):
     '''CountryLanguage'''
@@ -38,3 +41,6 @@ class CountryLanguage(models.Model):
         verbose_name = _('Country Language')
         verbose_name_plural = _('Countries Language')
         db_table = 'countries_language'
+
+    def __str__(self):
+        return self.title

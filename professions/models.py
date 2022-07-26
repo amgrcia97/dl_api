@@ -17,3 +17,6 @@ class Profession(models.Model):
         verbose_name = _('Profession')
         verbose_name_plural = _('Professions')
         db_table = 'professions'
+
+    def __str__(self):
+        return self.title

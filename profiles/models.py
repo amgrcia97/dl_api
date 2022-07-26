@@ -18,3 +18,6 @@ class Profile(models.Model):
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
         db_table = 'profiles'
+
+    def __str__(self):
+        return self.title

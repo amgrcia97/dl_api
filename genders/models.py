@@ -17,3 +17,6 @@ class Gender(models.Model):
         verbose_name = _('Gender')
         verbose_name_plural = _('Genders')
         db_table = 'genders'
+
+    def __str__(self):
+        return self.title
