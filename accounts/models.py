@@ -9,6 +9,7 @@ from addresses.models import Country, State, City, Address
 DEFAULT_STATUS = (
         (1, _('Active')),
         (2, _('Inactive')),
+        (3, _('Pre_registered')),
         (3, _('Deleted')),
     )
 

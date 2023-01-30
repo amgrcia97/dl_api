@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'addresses',
     'languages',
+    'install'
     ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ WSGI_APPLICATION = 'discere_linguis_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'discere_linguis',
+        'NAME': BASE_DIR / 'discere_linguis_db',
     }
 }
 

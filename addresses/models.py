@@ -10,13 +10,18 @@ class Country(models.Model):
         (3, _('Deleted')),
     )
     name = models.CharField(_('Country'), max_length=256, null=False, blank=False)
-    code = models.CharField(_('Country Code'), max_length=3, null=True, blank=True)
+    alpha2Code = models.CharField(_('Country alpha2 Code'), max_length=3, null=True, blank=True)
+    alpha3Code = models.CharField(_('Country alpha3 Code'), max_length=3, null=True, blank=True)
+    flag = models.CharField(_('Country Code'), max_length=2048, null=True, blank=True)
     status = models.IntegerField(choices=COUNTRY_STATUS, default=1)
 
     class Meta:
         verbose_name = _('Country')
         verbose_name_plural = _('Countries')
         db_table = 'countries'
+
+    def __str__(self):
+        return self.name
 
 
 class State(models.Model):
