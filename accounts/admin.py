@@ -1,10 +1,6 @@
 from django.contrib import admin
 from accounts.models import (
-    User,
-    AgeGroup,
-    Phone,
-    UserType,
-    UserData
+    User
 )
 
 
@@ -12,7 +8,7 @@ from accounts.models import (
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'username',
+        'full_name',
         'email',
         'nick_name',
         'date_joined',
@@ -20,47 +16,4 @@ class UserAdmin(admin.ModelAdmin):
         'status',
         'is_staff',
         'is_superuser'
-        )
-
-
-@admin.register(AgeGroup)
-class AgeGroupAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'title',
-        'slug',
-        'status'
-        )
-
-
-@admin.register(Phone)
-class PhoneAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'phone',
-        )
-
-
-@admin.register(UserType)
-class UserTypeAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'title',
-        'slug',
-        'status'
-        )
-
-
-@admin.register(UserData)
-class UserDataAdmin(admin.ModelAdmin):
-    list_display = (
-        'user',
-        'gender',
-        'age_group',
-        'birthday',
-        'document',
-        'address',
-        'phone',
-        'profession',
-        'user_type'
         )

@@ -13,19 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
+from django.conf import settings
+from django.conf.urls import include
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include
-from django.urls import re_path as url
+from django.urls import path, re_path as url
 
 urlpatterns = [
-    # path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url('^api-auth/', include('rest_framework.urls')),
-
     url('^accounts/', include('accounts.urls')),
-    url('^countries/', include('countries.urls')),
-    url('^genders/', include('genders.urls')),
     url('^languages/', include('languages.urls')),
-    url('^professions/', include('professions.urls')),
-    url('^profiles/', include('profiles.urls')),
     url('^', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = [
+    path('__debug__/', include(debug_toolbar.urls)),
+] + urlpatterns
