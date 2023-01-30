@@ -7,6 +7,9 @@ __pycache__/
 *.so
 .vscode/
 
+# DB
+discere_linguis_db
+
 # Distribution / packaging
 .Python
 build/
