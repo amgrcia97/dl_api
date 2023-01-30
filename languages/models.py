@@ -1,18 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-LANGUAGE_STATUS = (
-        (1, _('Active')),
-        (2, _('Inactive')),
-        (3, _('Deleted')),
-    )
+from addresses.models import Country
 
 
 class Language(models.Model):
     '''Language'''
     title = models.CharField(_('Language'), max_length=255, blank=False, null=False)
-    code = models.SlugField(_('code'), unique=True, blank=False, null=False)
-    status = models.IntegerField(_('Status'), choices=LANGUAGE_STATUS, default=1)
+    code = models.SlugField(_('Code'), unique=True, blank=False, null=False)
+    status = models.BooleanField(_('Active?'), default=True)
 
     class Meta:
         verbose_name = _('Language')
@@ -23,23 +18,17 @@ class Language(models.Model):
         return self.title
 
 
-# class CountryLanguage(models.Model):
-#     '''CountryLanguage'''
-#     COUNTRY_LANGUAGE_STATUS = (
-#         (1, _('Active')),
-#         (2, _('Inactive')),
-#         (3, _('Deleted')),
-#     )
-#     title = models.CharField(max_length=256, null=False, blank=False)
-#     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='country_language')
-#     language = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='country_language_language')
-#     code = models.CharField(_('Country Code'), max_length=3, null=True, blank=True)
-#     status = models.IntegerField(choices=COUNTRY_LANGUAGE_STATUS, default=1)
+class CountryLanguage(models.Model):
+    '''CountryLanguage'''
+    code = models.CharField(_('Country Language Code'), max_length=3, null=True, blank=True, unique=True)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='country_language')
+    language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='country_language_language')
+    status = models.BooleanField(_('Active?'), default=True)
 
-#     class Meta:
-#         verbose_name = _('Country Language')
-#         verbose_name_plural = _('Countries Language')
-#         db_table = 'countries_language'
+    class Meta:
+        verbose_name = _('Country Language')
+        verbose_name_plural = _('Countries Language')
+        db_table = 'countries_language'
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.code

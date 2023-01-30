@@ -1,4 +1,4 @@
-from django.urls import include  # , path
+from django.urls import include
 from django.urls import re_path as url
 from rest_framework import routers
 from languages.views import LanguageAdminViewSet
