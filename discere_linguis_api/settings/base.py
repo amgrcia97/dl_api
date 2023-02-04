@@ -26,18 +26,13 @@ SECRET_KEY = 'django-insecure-r)tbcissg(^s^=4x-k=e#-z@sp$)bh+u^0)*vnzxjw2%ms4!ae
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
     # OAuth2
     'oauth2_provider',
 
@@ -47,7 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'addresses',
     'languages',
-    'install'
+    'install',
     ]
 
 MIDDLEWARE = [
@@ -58,6 +53,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.gzip.GZipMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
+    # # Take5 - Processos
+    # 'accounts.middleware.oauth_token.BeforeTokenMiddleware',
+    # 'system_audit.middleware.SystemAuditMiddleware'
 ]
 
 INTERNAL_IPS = [
@@ -89,12 +98,12 @@ WSGI_APPLICATION = 'discere_linguis_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'discere_linguis_db',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'discere_linguis_db',
+#     }
+# }
 
 
 # Password validation
@@ -161,3 +170,5 @@ OAUTH2_PROVIDER = {
     # this is the list of available scopes
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
 }
+
+DJANGO_SETTINGS_MODULE = 'discere_linguis_api.settings.dev'
