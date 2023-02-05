@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-r)tbcissg(^s^=4x-k=e#-z@sp$)bh+u^0)*vnzxjw2%ms4!ae
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -35,9 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
     # OAuth2
     'oauth2_provider',
-
-    'django_filters',
-    'rest_framework',
+    # Rest Framework
+    'rest_framework', 'rest_framework.authtoken', 'corsheaders', 'django_filters',
+    # Debug
+    'debug_toolbar',
 
     'accounts',
     'addresses',
@@ -46,26 +47,19 @@ INSTALLED_APPS = [
     ]
 
 MIDDLEWARE = [
+    # 'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.gzip.GZipMiddleware',
-    # 'django.middleware.security.SecurityMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',
-    # 'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
-    # # Take5 - Processos
-    # 'accounts.middleware.oauth_token.BeforeTokenMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    # Take5 - Processos
+    'accounts.middleware.oauth_token.BeforeTokenMiddleware',
     # 'system_audit.middleware.SystemAuditMiddleware'
 ]
 
