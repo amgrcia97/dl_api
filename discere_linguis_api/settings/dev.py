@@ -19,7 +19,7 @@ ROOT_URLCONF = 'discere_linguis_api.urls'
 # SYSTEM_EMAIL_NAME = SYSTEM_NAME
 # SYSTEM_EMAIL = 'suporte@take5.com.br'
 # PRIMARY_COLOR = '#002A68'
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
