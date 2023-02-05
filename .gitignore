@@ -8,7 +8,7 @@ __pycache__/
 .vscode/
 
 # DB
-discere_linguis_db
+discere_linguis_prod
 discere_linguis_dev
 
 # Distribution / packaging
