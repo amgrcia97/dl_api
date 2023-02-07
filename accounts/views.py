@@ -23,9 +23,10 @@ class EmptySerializer(serializers.ModelSerializer):
         fields = []
 
 
-class RegisterUserView(viewsets.GenericViewSet):
+class RegisterUserView(viewsets.ModelViewSet):
     '''User register methods'''
     serializer_class = EmptySerializer
+    permission_classes = []
 
     @action(detail=False, methods=['GET'], name='Pre-register Lists')
     def get_register_lists(self, request):
@@ -38,24 +39,23 @@ class RegisterUserView(viewsets.GenericViewSet):
         }
         return Response(data, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['POST'], name='Check if the informed document already exists')
-    def check_user_document_existance(self, request):
-        if not request.data.get('document', None):
-            raise ValidationError({'document': _('Please inform a document')})
-        document = request.data.get('document')
-        exists = UserData.objects.filter(document=document).exists()
-        if exists:
-            return Response('Document already exist', status=status.HTTP_406_NOT_ACCEPTABLE)
-        else:
-            return Response('Valid document', status=status.HTTP_200_OK)
+    # @action(detail=False, methods=['POST'], name='Check if the informed document already exists')
+    # def check_user_document_existance(self, request):
+    #     if not request.data.get('document', None):
+    #         raise ValidationError({'document': _('Please inform a document')})
+    #     document = request.data.get('document')
+    #     exists = UserData.objects.filter(document=document).exists()
+    #     if exists:
+    #         return Response('Document already exist', status=status.HTTP_406_NOT_ACCEPTABLE)
+    #     else:
+    #         return Response('Valid document', status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['POST'], name='Check if the informed email already exists')
     def check_user_email_existance(self, request):
         if not request.data.get('email', None):
             raise ValidationError({'email': _('Please inform a document')})
         email = request.data.get('email')
-        exist = User.objects.filter(email=email).exists()
-        if exist:
+        if User.objects.filter(email=email).exists():
             return Response('Email already exist', status=status.HTTP_406_NOT_ACCEPTABLE)
         else:
             return Response('Valid email', status=status.HTTP_200_OK)
