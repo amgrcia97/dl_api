@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from accounts.managers import UserManager
 from addresses.models import Country, State, City, Address
+from languages.models import CountryLanguage, Language
 
 
 DEFAULT_STATUS = (
@@ -48,6 +49,7 @@ class UserAvatar(models.Model):
 
 
 class UserData(models.Model):
+    '''User Data'''
     USER_TYPE = (
         (1, _('Teacher')),
         (2, _('Student')),
@@ -63,13 +65,15 @@ class UserData(models.Model):
     age = models.IntegerField(_('User Age'), null=True)
     phone = models.CharField(_('Phone'), max_length=126, null=True, blank=False)
     gender = models.IntegerField(_('User Gender'), choices=USER_GENDER, null=True)
-    birthday = models.DateField(_('Data de nascimento'), auto_now=False, null=True)
-    document = models.CharField(_('Documento'), max_length=255, blank=True, null=True, unique=True)
+    birthday = models.DateField(_('Born Date'), auto_now=False, null=True)
+    document = models.CharField(_('Document'), max_length=255, blank=True, null=True, unique=True)
     born_country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='user_born_country')
+    born_language = models.ForeignKey(CountryLanguage, on_delete=models.CASCADE, blank=True, null=True, related_name='user_born_language')
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='user_country')
-    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='user_state')
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='user_city')
-    addresses = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='user_addresses')
+    state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True, related_name='user_state')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True, related_name='user_city')
+    interest_language = models.ForeignKey(Language, on_delete=models.CASCADE, blank=True, null=True, related_name='user_interested_language')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True, related_name='user_address')
 
     class Meta:
         verbose_name = _('Dados do usuário')
