@@ -21,5 +21,8 @@ def installer(request):
     data = __log(data, 'Countries and country languages start...')
     InstallManager().set_default_countries()
     data = __log(data, 'Countries and country languages end...', True)
+    data = __log(data, 'States and cities start...')
+    InstallManager().set_default_states_and_cities()
+    data = __log(data, 'States and cities end...', True)
 
     return HttpResponse(data)

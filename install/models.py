@@ -1,7 +1,8 @@
 import requests
+import json
 from accounts.models import User
 from languages.models import Language, CountryLanguage
-from addresses.models import Country
+from addresses.models import City, Country, State
 
 
 class InstallManager:
@@ -62,3 +63,19 @@ class InstallManager:
                             country=Country.objects.get(alpha3Code=country['alpha3Code']),
                             language=Language.objects.get(code=language['iso639_1']),
                         )
+
+    def set_default_states_and_cities(self):
+        country = Country.objects.get(name='Brazil')
+        brazil_states = open('install/utils/brazil/states.json', encoding='utf-8')
+        brazil_states = json.load(brazil_states)
+        for state in brazil_states:
+            if not State.objects.filter(name=state['name'], initial=state['initial']).exists():
+                State.objects.create(name=state['name'], initial=state['initial'], country=country)
+
+        brazil_cities = open('install/utils/brazil/cities.json', encoding='utf-8')
+        brazil_cities = json.load(brazil_cities)
+        for state in brazil_cities:
+            st = State.objects.get(initial=state)
+            for city in brazil_cities[state]:
+                if not City.objects.filter(name=city, state=st).exists():
+                    City.objects.create(name=city, state=st)

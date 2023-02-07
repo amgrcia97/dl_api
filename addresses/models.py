@@ -32,6 +32,7 @@ class State(models.Model):
         (3, _('Deleted')),
     )
     name = models.CharField(_('State'), max_length=256, null=False, blank=False)
+    initial = models.CharField(_('Initial'), max_length=256, null=False, blank=False)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='country_states')
     status = models.IntegerField(choices=STATE_STATUS, default=1)
 
