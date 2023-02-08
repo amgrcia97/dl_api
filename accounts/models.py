@@ -62,7 +62,6 @@ class UserData(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='user_data')
     type = models.IntegerField(_('User Type'), choices=USER_TYPE, null=False, default=2)
-    age = models.IntegerField(_('User Age'), null=True)
     phone = models.CharField(_('Phone'), max_length=126, null=True, blank=False)
     gender = models.IntegerField(_('User Gender'), choices=USER_GENDER, null=True)
     birthday = models.DateField(_('Born Date'), auto_now=False, null=True)

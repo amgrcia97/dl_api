@@ -1,6 +1,7 @@
 import requests
 import json
-from accounts.models import User
+from datetime import datetime
+from accounts.models import User, UserData
 from languages.models import Language, CountryLanguage
 from addresses.models import City, Country, State
 
@@ -20,6 +21,21 @@ class InstallManager:
                 user1 = User.objects.get(email=user['email'])
                 user1.set_password(user['password'])
                 user1.save()
+            if not UserData.objects.filter(user__email=user['email']).exists():
+                UserData.objects.create(
+                    user=User.objects.get(email=user['email']),
+                    type=3,
+                    phone='11 992638529',
+                    gender=1,
+                    birthday=datetime(day=19, month=1, year=1997),
+                    document='12345678965',
+                    born_country=Country.objects.get(name='Cuba'),
+                    born_language=CountryLanguage.objects.get(code='es-cu'),
+                    country=Country.objects.get(name='Brazil'),
+                    state=State.objects.get(initial='SP'),
+                    city=City.objects.get(name='Osasco'),
+                    interest_language=Language.objects.get(code='pt')
+                )
 
     def set_default_languages(self):
         '''Creates the default languages'''
