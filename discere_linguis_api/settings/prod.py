@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from discere_linguis_api.settings.base import *  # noqa: F401, F403
 
@@ -15,3 +16,4 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
